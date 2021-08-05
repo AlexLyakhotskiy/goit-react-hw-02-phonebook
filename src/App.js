@@ -19,11 +19,12 @@ class App extends Component {
   addContact = contact => {
     if (this.findDuplicateContact(contact)) {
       alert(`${contact.name} is already in contacts`);
-      return;
+      return false;
     }
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
+    this.setState(({ contacts }) => ({
+      contacts: [contact, ...contacts],
     }));
+    return true;
   };
 
   deleteContact = contactId => {
@@ -58,7 +59,10 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.onInputChange} />
-        <ContactList data={this.filterContact()} remove={this.deleteContact} />
+        <ContactList
+          filtredContacts={this.filterContact()}
+          remove={this.deleteContact}
+        />
       </Container>
     );
   }

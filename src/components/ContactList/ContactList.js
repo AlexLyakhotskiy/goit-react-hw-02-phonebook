@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import styles from './ContactList.module.css';
 
-const ContactList = ({ data, remove }) => (
+const ContactList = ({ filtredContacts, remove }) => (
   <ul className={styles.list}>
-    {data.map(({ id, name, number }) => (
+    {filtredContacts.map(({ id, name, number }) => (
       <li key={id} className={styles.item}>
         <p className={styles.text}>{name}:</p>
         <p className={styles.text}>{number}</p>
@@ -22,7 +22,7 @@ const ContactList = ({ data, remove }) => (
 );
 
 ContactList.propTypes = {
-  data: PropTypes.arrayOf(
+  filtredContacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

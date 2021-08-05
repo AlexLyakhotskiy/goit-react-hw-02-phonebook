@@ -22,16 +22,18 @@ class ContactForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit({
+    const isSuccess = this.props.onSubmit({
       name: this.state.name,
       number: this.state.number,
       id: uuidv4(),
     });
 
-    this.setState({
-      name: '',
-      number: '',
-    });
+    if (isSuccess) {
+      this.setState({
+        name: '',
+        number: '',
+      });
+    }
   };
 
   render() {
